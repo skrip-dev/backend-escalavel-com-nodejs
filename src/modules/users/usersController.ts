@@ -24,3 +24,21 @@ export const usersCreate = (req: Request, res: Response) => {
 
   res.json(newUser);
 };
+
+export const userShow = (req: Request, res: Response) => {
+  const params = req.params;
+
+  const user = usersList.find(
+    (currentUser) => currentUser.id === params.user_id,
+  );
+
+  if (!user) {
+    return res.status(404).json({
+      error: 'not found',
+    });
+  }
+
+  res.json({
+    user,
+  });
+};
