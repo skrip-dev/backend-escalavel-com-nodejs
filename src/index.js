@@ -1,21 +1,14 @@
 import express from 'express'
-import { promises } from 'fs'
+import {usersRouter} from './modules/users/usersRouter.js'
 
 const server = express()
-
+server.use(express.json())
 
 server.get('/', async (req, res)=>{
-  const data = await promises.readFile('package.json', {
-    encoding:'utf-8'
-  });
-
-  res.send(data)
-})
-
-server.get('/info', async (req, res)=>{
   res.send('Hello APP')
 })
 
+server.use('/users',usersRouter)
 
 server.listen(3333, ()=>{
   console.log('server listen')
