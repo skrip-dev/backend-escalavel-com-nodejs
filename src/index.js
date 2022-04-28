@@ -12,6 +12,10 @@ server.get('/', async (req, res)=>{
   res.send(data)
 })
 
+server.get('/info', async (req, res)=>{
+  res.send('Hello APP')
+})
+
 
 server.listen(3333, ()=>{
   console.log('server listen')
