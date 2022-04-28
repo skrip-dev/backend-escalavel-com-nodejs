@@ -1,15 +1,16 @@
-import express from 'express'
-import {usersRouter} from './modules/users/usersRouter.js'
+import express from 'express';
 
-const server = express()
-server.use(express.json())
+import { usersRouter } from './modules/users/usersRouter.js';
 
-server.get('/', async (req, res)=>{
-  res.send('Hello APP Typescript')
-})
+const server = express();
+server.use(express.json());
 
-server.use('/users',usersRouter)
+server.get('/', async (req, res) => {
+  res.send('Hello APP Typescript');
+});
 
-server.listen(3333, ()=>{
-  console.log('server listen')
-})
+server.use('/users', usersRouter);
+
+server.listen(3333, () => {
+  console.log('server listen');
+});

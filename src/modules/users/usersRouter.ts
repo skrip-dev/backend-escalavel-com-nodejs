@@ -1,10 +1,9 @@
-import { Router } from "express";
+import { Router } from 'express';
 
-import {usersIndex,usersCreate} from './usersController.js'
+import { usersIndex, usersCreate } from './usersController.js';
 
 export const usersRouter = Router();
 
+usersRouter.get('/', usersIndex);
 
-usersRouter.get('/', usersIndex)
-
-usersRouter.post('/', usersCreate)
+usersRouter.post('/', usersCreate);
