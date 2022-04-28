@@ -5,7 +5,7 @@ const server = express()
 server.use(express.json())
 
 server.get('/', async (req, res)=>{
-  res.send('Hello APP')
+  res.send('Hello APP Typescript')
 })
 
 server.use('/users',usersRouter)

@@ -1,0 +1,14 @@
+{
+  "ignore": [
+    ".git",
+    "node_modules/**/node_modules"
+  ],
+  "verbose": false,
+  "execMap": {
+    "js": "node --loader ts-node/esm ./src/index.ts"
+  },
+  "watch": [
+    "src/"
+  ],
+  "ext": "js ts json"
+}
