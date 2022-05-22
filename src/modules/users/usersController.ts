@@ -1,36 +1,36 @@
-import { randomUUID } from 'crypto';
+import prisma from '@prisma/client';
 import { Request, Response } from 'express';
 
-interface IUserItem {
-  id: string;
-  name: string;
-}
+const prismaClient = new prisma.PrismaClient();
 
-const usersList: IUserItem[] = [];
+export const usersIndex = async (req: Request, res: Response) => {
+  const users = await prismaClient.user.findMany();
 
-export const usersIndex = (req: Request, res: Response) => {
-  res.json(usersList);
+  res.json(users);
 };
 
-export const usersCreate = (req: Request, res: Response) => {
-  const requestData = req.body;
+export const usersCreate = async (req: Request, res: Response) => {
+  const { name, email, password } = req.body;
 
-  const newUser: IUserItem = {
-    id: randomUUID(),
-    name: requestData.name,
-  };
-
-  usersList.push(newUser);
+  const newUser = await prismaClient.user.create({
+    data: {
+      name,
+      email,
+      password,
+    },
+  });
 
   res.json(newUser);
 };
 
-export const userShow = (req: Request, res: Response) => {
-  const params = req.params;
+export const userShow = async (req: Request, res: Response) => {
+  const { user_id } = req.params;
 
-  const user = usersList.find(
-    (currentUser) => currentUser.id === params.user_id,
-  );
+  const user = await prismaClient.user.findFirst({
+    where: {
+      id: user_id,
+    },
+  });
 
   if (!user) {
     return res.status(404).json({
